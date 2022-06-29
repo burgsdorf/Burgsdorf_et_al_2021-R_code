@@ -153,7 +153,7 @@ Data used to build the final figure construction.
       theme_bw() +
       theme(legend.position = "none", legend.direction = "horizontal", text = element_text(size=15))
 
-# Combining plots
+#Combining plots
     ggarrange(cox_ID_THRH_melted_gF2, anaplerotic_4_genes_ID_THRH_melted_gF3, fixation_3_ID_THRH_melted_gF3,
               labels = c("A", "B", "C"),
               ncol = 1, nrow = 3)
