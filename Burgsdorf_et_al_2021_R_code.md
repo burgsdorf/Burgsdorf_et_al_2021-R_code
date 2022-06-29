@@ -9,33 +9,12 @@ R code used to build figures for Burgsdorf et al., 2021
 
 Data used to build the final figure construction.
 
-    load("D:/Dropbox/(Bio)Informatic_protocols/R/!!!_Markdown_pipelines/2020_50_genomes_graphics_UTF-8.RData")
+    load("2020_50_genomes_graphics_UTF-8.RData")
     library(ggplot2)
-
-    ## Warning: package 'ggplot2' was built under R version 3.6.3
-
     library(superheat)
-
-    ## Warning: package 'superheat' was built under R version 3.6.3
-
     library(plyr)
-
-    ## Warning: package 'plyr' was built under R version 3.6.3
-
     library(ggpubr)
-
-    ## Warning: package 'ggpubr' was built under R version 3.6.3
-
-    ## 
-    ## Attaching package: 'ggpubr'
-
-    ## The following object is masked from 'package:plyr':
-    ## 
-    ##     mutate
-
     library(reshape2)
-
-    ## Warning: package 'reshape2' was built under R version 3.6.3
 
     # set the text colors 
     # identify all scaled values that fall below (white)
@@ -70,20 +49,6 @@ Data used to build the final figure construction.
 
     ## [1]   0  20  50  80 100
 
-    ## Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique
-    ## 'x' values
-
-    ## Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique
-    ## 'x' values
-
-    ## Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique
-    ## 'x' values
-
-    ## Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique
-    ## 'x' values
-
-![](Burgsdorf_et_al_2021_R_code_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-
 ## Figure 3
 
 ### Figure 3A
@@ -99,8 +64,6 @@ Data used to build the final figure construction.
       scale_y_continuous(breaks = seq(0, 60, 10))
 
     COG1529_taxa_bbplot
-
-![](Burgsdorf_et_al_2021_R_code_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ### Figure 3B
 
@@ -139,20 +102,6 @@ Data used to build the final figure construction.
               order.rows = order(COG1529_taxa_RA$K03520)
               )
 
-    ## Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique
-    ## 'x' values
-
-    ## Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique
-    ## 'x' values
-
-    ## Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique
-    ## 'x' values
-
-    ## Warning in regularize.values(x, y, ties, missing(ties)): collapsing to unique
-    ## 'x' values
-
-![](Burgsdorf_et_al_2021_R_code_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
-
 ## Figure 5
 
 ### Preliminary data before binary transformation. An example of *cox* genes.
@@ -166,10 +115,6 @@ Data used to build the final figure construction.
       #scale_y_continuous(breaks = seq(0, 6, 1)) +
       theme_bw() +
       theme(legend.position = "bottom", legend.direction = "horizontal", text = element_text(size=15))
-      
-    cox_ID_THRH_melted_g1
-
-![](Burgsdorf_et_al_2021_R_code_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
     cox_ID_THRH_short2_agg_sep_melted <- melt(cox_ID_THRH_short2_agg_sep[,-2],id=c("Final_annotation","Phylum/Class"))
     cox_ID_THRH_short2_agg_sep_melted$binary <- ifelse(cox_ID_THRH_short2_agg_sep_melted$value>0, 1, 0)
@@ -208,15 +153,14 @@ Data used to build the final figure construction.
       theme_bw() +
       theme(legend.position = "none", legend.direction = "horizontal", text = element_text(size=15))
 
+# Combining plots
     ggarrange(cox_ID_THRH_melted_gF2, anaplerotic_4_genes_ID_THRH_melted_gF3, fixation_3_ID_THRH_melted_gF3,
               labels = c("A", "B", "C"),
               ncol = 1, nrow = 3)
 
-![](Burgsdorf_et_al_2021_R_code_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
-
 ## Figure 6
 
-    load("D:/Dropbox/(Bio)Informatic_protocols/R/!!!_Markdown_pipelines/Radioactive_sponge_2020.RData")
+    load("Radioactive_sponge_2020.RData")
 
 ### An example of mean and sd calculation based on “status” (dark or light) and core depths (mm) of Petrosia ficiformis.
 
@@ -322,8 +266,6 @@ Data used to build the final figure construction.
       scale_color_manual(labels = c("+CaSf Dark","-CaSf Dark","+CaSf Light","-CaSf Light"), values = c("royalblue3","royalblue4","orange2","orange3")) +
       xlab("Sponge section (mm)") + ylab("")
 
-
     # Combining plots
     ggarrange(Ts_Fig12_graph, Pf_Exp2_ddply_graph, Ts_Fig13_graph, Pf_Exp3_ddply_graph, ncol = 2, nrow = 2, labels = c("A","B","C","D"))
 
-![](Burgsdorf_et_al_2021_R_code_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
